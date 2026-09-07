@@ -5,6 +5,7 @@
 [![python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](pyproject.toml)
 
 Small open models fine-tuned for competitive programming, trained on free GPUs.
+Part of [NiLabs](https://nilabs.dev) &mdash; project page at [nilabs.dev/ladder](https://nilabs.dev/ladder).
 
 Ladder is a QLoRA fine-tuning and evaluation pipeline for Codeforces-style
 problems. It is built around one constraint: **everything has to run on a free
@@ -16,9 +17,11 @@ reference solution, or by whether the output looks like code. A generated progra
 is run against the problem's actual test cases, and it either passes them or it
 does not.
 
-> **Status:** pipeline complete and tested; no trained checkpoint published yet.
-> The results table below is empty on purpose. It gets filled in from a real run,
-> not from an estimate.
+> **Status:** the pipeline runs end to end and an adapter exists. There is still
+> no publishable number. The first base-vs-tuned evaluation was **inconclusive**
+> for a diagnosed reason and is being re-run. The results table below stays empty
+> until a defensible measurement replaces it, and what has been run so far is
+> written up in [Results](#results) rather than left out.
 
 ## What it does
 
@@ -129,6 +132,59 @@ Every knob lives in `configs/*.yaml`, and an unrecognized key is an error rather
 than a silent no-op — a typo'd `learning_rat` should not cost you a four-hour run.
 
 ## Results
+
+### The adapter exists
+
+One adapter has been trained. Every number here is measured, from
+[`results/2026-08-19-train/`](results/2026-08-19-train/).
+
+| | |
+| --- | --- |
+| Base | `unsloth/Qwen2.5-Coder-3B-Instruct-bnb-4bit` |
+| Data | 2,271 train / 85 val, every trace verified by execution |
+| Steps | 150, effective batch 16 (~1 epoch) |
+| Context | 8,192 |
+| Hardware | Tesla T4 16GB, free tier |
+| Wall clock | 5.05 h at 594.9 tok/s, peak 6.78 GB VRAM |
+
+That is the whole point of the constraint: a usable adapter off one free Kaggle
+session, with room to spare on a 16GB card.
+
+### The first evaluation was inconclusive
+
+A base-vs-tuned run on 40 held-out div2 A/B problems returned pass@1 of 0.050
+for **both** models. **That delta means nothing and should not be quoted.** The
+two models were not measured on comparable terms:
+
+| verdict | base | tuned |
+| --- | --- | --- |
+| `no_code` | 0 | **28** |
+| `wrong_answer` | 31 | 10 |
+| `runtime_error` | 7 | 0 |
+| `accepted` | 2 | 2 |
+
+The tuned model produced no code at all on 70% of problems. The base model on
+none of them. Same problems, same prompt, same decoding, same 4,096-token
+budget.
+
+The training data is the cause. Traces in `codeforces-cots` have a median of
+~13,770 estimated tokens, so the fine-tune was taught to reason at length and
+was then given 4,096 tokens to do it in. It gets cut off mid-reasoning and
+scores as producing nothing.
+
+- **Can be said:** training made the model substantially more verbose, and at
+  this budget verbosity dominates everything else.
+- **Cannot be said:** whether the fine-tune is better or worse than the base
+  model. The measurement does not support a comparison in either direction.
+
+Full write-up in [`results/2026-08-19-eval-easy/`](results/2026-08-19-eval-easy/).
+
+**Next:** re-run with a generation budget measured from what the tuned model
+actually emits, rather than guessed at. The previous budget was raised from
+3,072 to 4,096 on exactly this reasoning without checking the real distribution,
+which papered over a roughly 3x shortfall with a 33% increase.
+
+### The number that goes in the README
 
 Baseline and fine-tune, same 100 held-out problems, same prompt, greedy decoding.
 
