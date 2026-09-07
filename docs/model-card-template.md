@@ -18,7 +18,7 @@ language:
 
 A QLoRA adapter for `Qwen2.5-Coder-3B-Instruct`, fine-tuned on verified
 Codeforces reasoning traces. Trained and evaluated with
-[Ladder](https://github.com/NiLabs-Models/ladder).
+[Ladder](https://github.com/NiLabs-Org/ladder).
 
 This is an **adapter**, not a merged model. Load it on top of the base.
 
@@ -40,7 +40,7 @@ scoring cannot grade them.
 Reproduce:
 
 ```bash
-git clone https://github.com/NiLabs-Models/ladder
+git clone https://github.com/NiLabs-Org/ladder
 ladder eval --config configs/ladder-3b-kaggle.yaml                    # base
 ladder eval --config configs/ladder-3b-kaggle.yaml --adapter <this>   # tuned
 ```

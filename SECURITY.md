@@ -38,7 +38,7 @@ them against model outputs or datasets from a source you do not trust.
 
 ## Reporting a vulnerability
 
-Open an issue at https://github.com/NiLabs-Models/ladder/issues for anything
+Open an issue at https://github.com/NiLabs-Org/ladder/issues for anything
 affecting the harness itself.
 
 Please do **not** file "the sandbox can read files" or "the sandbox can reach the

@@ -63,7 +63,7 @@ save()
 
 subprocess.run("pip install -q 'datasets>=2.19'", shell=True, check=False)
 if not os.path.isdir("/tmp/ladder"):
-    subprocess.run("git clone -q https://github.com/NiLabs-Models/ladder.git "
+    subprocess.run("git clone -q https://github.com/NiLabs-Org/ladder.git "
                    "/tmp/ladder", shell=True, check=True)
 sys.path.insert(0, "/tmp/ladder/src")
 

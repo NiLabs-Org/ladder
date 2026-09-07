@@ -17,7 +17,7 @@ import sys
 import time
 import traceback
 
-REPO = "https://github.com/NiLabs-Models/ladder.git"
+REPO = "https://github.com/NiLabs-Org/ladder.git"
 # Cloned outside /kaggle/working on purpose: everything under working becomes
 # kernel output, so cloning there put the whole repo in every download and made
 # fetching a 2KB status.json take minutes. Output should be results only.

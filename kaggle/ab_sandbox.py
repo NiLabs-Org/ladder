@@ -38,7 +38,7 @@ def save():
 subprocess.run("pip install -q 'datasets>=2.19'", shell=True, check=False)
 if not os.path.isdir(REPO):
     subprocess.run(
-        f"git clone -q https://github.com/NiLabs-Models/ladder.git {REPO}",
+        f"git clone -q https://github.com/NiLabs-Org/ladder.git {REPO}",
         shell=True, check=True,
     )
 sys.path.insert(0, f"{REPO}/src")

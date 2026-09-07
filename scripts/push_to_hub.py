@@ -9,7 +9,7 @@ results drift from what was actually measured.
         --adapter outputs/kaggle/outputs/ladder-3b-kaggle \
         --base-results outputs/kaggle/outputs/eval-base.json \
         --tuned-results outputs/kaggle/outputs/eval-tuned.json \
-        --repo NiLabs-Models/Ladder-3B
+        --repo NiLabs-Org/Ladder-3B
 
 Needs an HF token with write access: `huggingface-cli login`, or HF_TOKEN.
 """
@@ -69,7 +69,7 @@ def main() -> int:
     parser.add_argument("--adapter", required=True, help="directory holding the LoRA adapter")
     parser.add_argument("--base-results", required=True)
     parser.add_argument("--tuned-results", required=True)
-    parser.add_argument("--repo", required=True, help="e.g. NiLabs-Models/Ladder-3B")
+    parser.add_argument("--repo", required=True, help="e.g. NiLabs-Org/Ladder-3B")
     parser.add_argument("--gpu", default="T4 16GB")
     parser.add_argument("--hours", default="?")
     parser.add_argument("--n-train", default="?")

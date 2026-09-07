@@ -1,6 +1,6 @@
 # Ladder
 
-[![ci](https://github.com/NiLabs-Models/ladder/actions/workflows/ci.yml/badge.svg)](https://github.com/NiLabs-Models/ladder/actions/workflows/ci.yml)
+[![ci](https://github.com/NiLabs-Org/ladder/actions/workflows/ci.yml/badge.svg)](https://github.com/NiLabs-Org/ladder/actions/workflows/ci.yml)
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](pyproject.toml)
 
@@ -292,7 +292,7 @@ are the roadmap; the ones tagged `good first issue` are self-contained and do no
 need a GPU.
 
 If you run a training job, please file a
-[run report](https://github.com/NiLabs-Models/ladder/issues/new?template=run_report.yml)
+[run report](https://github.com/NiLabs-Org/ladder/issues/new?template=run_report.yml)
 with the numbers. Measured throughput on real hardware is the main thing this
 project is short of.
 

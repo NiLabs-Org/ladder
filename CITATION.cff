@@ -7,7 +7,7 @@ abstract: >-
   programs against real test cases rather than by similarity to a reference.
 authors:
   - name: "NiLabs"
-repository-code: "https://github.com/NiLabs-Models/ladder"
+repository-code: "https://github.com/NiLabs-Org/ladder"
 license: Apache-2.0
 type: software
 keywords:
